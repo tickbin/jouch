@@ -33,6 +33,11 @@ function compileExpression(expression, failToQuerystring) {
       if (Array.isArray(node)) {
         node.forEach(toJs);
       } else {
+        // For whatever reason $and and $or get parsed by json into $$[$0-1]
+        // so I'm hackily ouputing $jand and $jor and replacing them before
+        // parsing to JSON
+        node = node.replace('$jand', '$and');
+        node = node.replace('$jor', '$or');
         js.push(node);
       }
     }
@@ -159,8 +164,11 @@ function filtrexParser() {
 
         // Comparisons  
         ['- e'    , code(['-', 2]), {prec: 'UMINUS'}],                        // done
-        ['e and e', code(['{"bool": { "must": [', 1, ', ', 3, ']}}'])],               // done
-        ['e or e' , code(['{"bool": { "should": [', 1, ', ', 3, ']}}'])],             // done
+        // hacky $jand and $jor since $and and $or seem to mean something
+        // in jison. I don't know what I'm doing
+        // TODO: fix this hacky mess
+        ['e and e', code(['{"$jand": [', 1, ', ', 3, ']}'])],               // done
+        ['e or e' , code(['{"$jor": [', 1, ', ', 3, ']}'])],             // done
         ['not e'  , code(['{"bool": { "must_not": [', 2, ']}}'])],                  // done
         ['e == e' , code(['{"', 1, '": {"$eq":', 3, '}}'])],                    // done
         ['e != e' , code(['{"', 1, '": {"$ne":', 3, '}}'])],      // done
