@@ -118,6 +118,7 @@ function filtrexParser() {
         ['or[^\\w]' , 'return "or";'],
         ['not[^\\w]', 'return "not";'],
         ['in[^\\w]', 'return "in";'],
+        ['has[^\\w]', 'return "has";'],
 
         ['\\s+',  ''], // skip whitespace
         ['[0-9]+(?:\\.[0-9]+)?\\b', 'return "NUMBER";'], // 212.321
@@ -138,7 +139,7 @@ function filtrexParser() {
       ['left', 'or'],
       ['left', 'and'],
       ['left', 'in'],
-      ['left', '==', '!='],
+      ['left', '==', '!=', 'has'],
       ['left', '<', '<=', '>', '>='],
       //['left', '~=', '~!='],
       //['left', '+', '-'],
@@ -171,6 +172,7 @@ function filtrexParser() {
         ['e and e', code(['{"$jand": [', 1, ', ', 3, ']}'])],               // done
         ['e or e' , code(['{"$jor": [', 1, ', ', 3, ']}'])],             // done
         ['not e'  , code(['{"$jnot": ', 2, '}'])],                  // done
+        ['e has e', code(['{"', 1, '": {"$elemMatch": {"$eq": ', 3, '}}}'])],                  // done
         ['e == e' , code(['{"', 1, '": {"$eq":', 3, '}}'])],                    // done
         ['e != e' , code(['{"', 1, '": {"$ne":', 3, '}}'])],      // done
 
