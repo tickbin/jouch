@@ -38,6 +38,7 @@ function compileExpression(expression, failToQuerystring) {
         // parsing to JSON
         node = node.replace('$jand', '$and');
         node = node.replace('$jor', '$or');
+        node = node.replace('$jnot', '$not');
         js.push(node);
       }
     }
@@ -164,12 +165,12 @@ function filtrexParser() {
 
         // Comparisons  
         ['- e'    , code(['-', 2]), {prec: 'UMINUS'}],                        // done
-        // hacky $jand and $jor since $and and $or seem to mean something
+        // hacky $jand, $jor, $jnot since $and, $or, $jnot seem to mean something
         // in jison. I don't know what I'm doing
         // TODO: fix this hacky mess
         ['e and e', code(['{"$jand": [', 1, ', ', 3, ']}'])],               // done
         ['e or e' , code(['{"$jor": [', 1, ', ', 3, ']}'])],             // done
-        ['not e'  , code(['{"bool": { "must_not": [', 2, ']}}'])],                  // done
+        ['not e'  , code(['{"$jnot": ', 2, '}'])],                  // done
         ['e == e' , code(['{"', 1, '": {"$eq":', 3, '}}'])],                    // done
         ['e != e' , code(['{"', 1, '": {"$ne":', 3, '}}'])],      // done
 
