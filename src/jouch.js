@@ -9,10 +9,10 @@
  * -Abe Haskins (originally Joe Walnes)
  */
 
-var queryBase = '{"query" : {"filtered" : { "filter": [',
-  queryEnd = ']}}}',
-  queryCleaner = /\$|\.|\(|\)|\=|\~|\[|\]|\!|\<|\>|\'|\"|\+/g,
-  debug = false;
+//var queryBase = '{"query" : {"filtered" : { "filter": [';
+//var queryEnd = ']}}}';
+var queryCleaner = /\$|\.|\(|\)|\=|\~|\[|\]|\!|\<|\>|\'|\"|\+/g;
+var debug = false;
 
 
 function compileExpression(expression, failToQuerystring) {
@@ -28,7 +28,7 @@ function compileExpression(expression, failToQuerystring) {
     tree = compileExpression.parser.parse(expression);
 
     var js = [];
-    js.push(queryBase);
+    //js.push(queryBase);
     function toJs(node) {
       if (Array.isArray(node)) {
         node.forEach(toJs);
@@ -37,7 +37,7 @@ function compileExpression(expression, failToQuerystring) {
       }
     }
     tree.forEach(toJs);
-    js.push(queryEnd);
+    //js.push(queryEnd);
   } catch (err) {
     if (debug) console.log(err);
     queryIsValid = false;
