@@ -162,8 +162,8 @@ function filtrexParser() {
         ['e and e', code(['{"bool": { "must": [', 1, ', ', 3, ']}}'])],               // done
         ['e or e' , code(['{"bool": { "should": [', 1, ', ', 3, ']}}'])],             // done
         ['not e'  , code(['{"bool": { "must_not": [', 2, ']}}'])],                  // done
-        ['e == e' , code(['{"term": {"', 1, '": ', 3, '}}'])],                    // done
-        ['e != e' , code(['{"bool": { "must_not": { "term": {"', 1, '": ', 3, '}}}}'])],      // done
+        ['e == e' , code(['{"', 1, '": {"$eq":', 3, '}}'])],                    // done
+        ['e != e' , code(['{"', 1, '": {"$ne":', 3, '}}'])],      // done
 
         //['e ~= STRING' , code(['{"bool": { "must": { "regexp": {"', 1, '": "', 3, '"}}}}'])],   // done
         //['e ~!= STRING' , code(['{"bool": { "must_not": { "regexp": {"', 1, '": "', 3, '"}}}}'])],  // done
