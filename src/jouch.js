@@ -72,8 +72,7 @@ function filtrexParser() {
   // which is a pure JavaScript implementation of
   // Bison <http://www.gnu.org/software/bison/>.
 
-  var Jison = require('jison'),
-    bnf = require('jison/bnf');
+  var Jison = require('jison')
 
   function code(args, skipParentheses) {
     skipParentheses = true;
