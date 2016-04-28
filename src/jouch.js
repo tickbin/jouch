@@ -61,7 +61,7 @@ function compileExpression(expression, failToQuerystring) {
       }
     };
   } else {
-    if (debug) console.log("ERROR", js && js.lenght? js.join('') : 'Parse failed');
+    if (debug) console.log("ERROR", js && js.length? js.join('') : 'Parse failed');
     throw "Invalid Query";
   }
 }
