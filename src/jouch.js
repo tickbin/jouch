@@ -104,10 +104,10 @@ function filtrexParser() {
         ['<=', 'return "<=";'],
         ['<', 'return "<";'],
         ['>', 'return ">";'],
-        ['~=', 'return "~=";'],
-        ['~!=', 'return "~!=";'],
-        ['\\?', 'return "?";'],
-        ['\\:', 'return ":";'],
+        //['~=', 'return "~=";'],
+        //['~!=', 'return "~!=";'],
+        //['\\?', 'return "?";'],
+        //['\\:', 'return ":";'],
         ['and[^\\w]', 'return "and";'],
         ['or[^\\w]' , 'return "or";'],
         ['not[^\\w]', 'return "not";'],
@@ -134,7 +134,7 @@ function filtrexParser() {
       ['left', 'in'],
       ['left', '==', '!='],
       ['left', '<', '<=', '>', '>='],
-      ['left', '~=', '~!='],
+      //['left', '~=', '~!='],
       //['left', '+', '-'],
       //['left', '*', '/', '%'],
       //['left', '^'],
@@ -165,8 +165,8 @@ function filtrexParser() {
         ['e == e' , code(['{"term": {"', 1, '": ', 3, '}}'])],                    // done
         ['e != e' , code(['{"bool": { "must_not": { "term": {"', 1, '": ', 3, '}}}}'])],      // done
 
-        ['e ~= STRING' , code(['{"bool": { "must": { "regexp": {"', 1, '": "', 3, '"}}}}'])],   // done
-        ['e ~!= STRING' , code(['{"bool": { "must_not": { "regexp": {"', 1, '": "', 3, '"}}}}'])],  // done
+        //['e ~= STRING' , code(['{"bool": { "must": { "regexp": {"', 1, '": "', 3, '"}}}}'])],   // done
+        //['e ~!= STRING' , code(['{"bool": { "must_not": { "regexp": {"', 1, '": "', 3, '"}}}}'])],  // done
 
         ['e < e'  , code(['{"range": {"', 1, '": {"lt": ' , 3, '}}}'])],              // done
         ['e <= e' , code(['{"range": {"', 1, '": {"lte": ' , 3, '}}}'])],             // done
