@@ -176,10 +176,10 @@ function filtrexParser() {
         //['e ~= STRING' , code(['{"bool": { "must": { "regexp": {"', 1, '": "', 3, '"}}}}'])],   // done
         //['e ~!= STRING' , code(['{"bool": { "must_not": { "regexp": {"', 1, '": "', 3, '"}}}}'])],  // done
 
-        ['e < e'  , code(['{"range": {"', 1, '": {"lt": ' , 3, '}}}'])],              // done
-        ['e <= e' , code(['{"range": {"', 1, '": {"lte": ' , 3, '}}}'])],             // done
-        ['e > e'  , code(['{"range": {"', 1, '": {"gt": ' , 3, '}}}'])],              // done
-        ['e >= e' , code(['{"range": {"', 1, '": {"gte": ' , 3, '}}}'])],             // done
+        ['e < e'  , code(['{"', 1, '": {"$lt": ' , 3, '}}'])],              // done
+        ['e <= e' , code(['{"', 1, '": {"$lte": ' , 3, '}}'])],             // done
+        ['e > e'  , code(['{"', 1, '": {"$gt": ' , 3, '}}'])],              // done
+        ['e >= e' , code(['{"', 1, '": {"$gte": ' , 3, '}}'])],             // done
         //['e ? e : e', code([1, '?', 3, ':', 5])],         
         ['( e )'  , code([2])],                                   // done
 
