@@ -1,12 +1,11 @@
 /**
- * FiltrES provides filtres.compile() to compile user expressions to an ElasticSearch query.
+ * Jouch provides jouch.compile() to compile expressions into a PouchDB find
+ * query object
  *
- * See https://github.com/abeisgreat/filtres for tutorial, reference and examples.
- * MIT License - based on Filtrex by Joe Walnes (https://github.com/joewalnes/filtrex) 
+ * MIT License - based on FiltrES by Abe Haskins (https://github.com/abehaskins/filtrES.js) 
  *
  * Includes Jison by Zachary Carter. See http://jison.org/
  *
- * -Abe Haskins (originally Joe Walnes)
  */
 
 //var queryBase = '{"query" : {"filtered" : { "filter": [';
