@@ -14,11 +14,11 @@ var queryCleaner = /\$|\.|\(|\)|\=|\~|\[|\]|\!|\<|\>|\'|\"|\+/g;
 var debug = false;
 
 
-function compileExpression(expression, failToQuerystring) {
+function compileExpression(expression) {
   if (!compileExpression.parser) {
     // Building the original parser is the heaviest part. Do it
     // once and cache the result in our own function.
-    compileExpression.parser = filtrexParser();
+    compileExpression.parser = jouchParser();
   }
 
   var tree, queryIsValid = true;
@@ -57,21 +57,11 @@ function compileExpression(expression, failToQuerystring) {
     queryIsValid = false;
   }
 
-  if (failToQuerystring) {
-    return {
-      "query" : {
-        "query_string" : {
-          "query": expression.replace(queryCleaner, '')
-        }
-      }
-    };
-  } else {
-    if (debug) console.log("ERROR", js && js.length? js.join('') : 'Parse failed');
-    throw "Invalid Query";
-  }
+  if (debug) console.log("ERROR", js && js.length? js.join('') : 'Parse failed');
+  throw "Invalid Query";
 }
 
-function filtrexParser() {
+function jouchParser() {
 
   // Language parser powered by Jison <http://zaach.github.com/jison/>,
   // which is a pure JavaScript implementation of
@@ -79,15 +69,12 @@ function filtrexParser() {
 
   var Jison = require('jison')
 
-  function code(args, skipParentheses) {
-    skipParentheses = true;
+  function code(args) {
     var argsJs = args.map(function(a) {
       return typeof(a) == 'number' ? ('$' + a) : JSON.stringify(a);
     }).join(',');
 
-    return skipParentheses
-        ? '$$ = [' + argsJs + '];'
-        : '$$ = ["(", ' + argsJs + ', ")"];';
+    return '$$ = [' + argsJs + '];';
   }
 
   var grammar = {
@@ -208,8 +195,8 @@ function filtrexParser() {
   return new Jison.Parser(grammar);
 }
 
-var filtres = {
+var jouch = {
   compile: compileExpression
 };
 
-module.exports = filtres;
+module.exports = jouch;
