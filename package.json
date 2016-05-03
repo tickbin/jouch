@@ -2,7 +2,7 @@
   "name": "jouch",
   "version": "0.0.1",
   "description": "couchdb query parser",
-  "main": "index.js",
+  "main": "src/jouch.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
