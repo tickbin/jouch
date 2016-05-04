@@ -58,9 +58,9 @@ const selector = jouch('age >= 18 and skills has "javascript"')
 
 would parse to
 ```json
-{ '$and': [
-    { 'age': {'$eq': 1}},
-    { '$elemMatch': {'skills': {'$eq': 'javascript'}}}
+{ "$and": [
+    { "age": {"$eq": 1}},
+    { "$elemMatch": {"skills": {"$eq": "javascript"}}}
    ]
 }
 ```
