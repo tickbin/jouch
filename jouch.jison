@@ -43,7 +43,7 @@ has[^\w]                            return 'has';
 
 expressions
   : e EOF
-    {console.log(JSON.stringify($1)); return $1;}
+    {return JSON.stringify($1);}
   ;
 
 e
