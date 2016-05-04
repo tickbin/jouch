@@ -86,8 +86,8 @@ value
   ;
 
 ElemList
-  : ElemList ',' e
+  : ElemList ',' value
     {$$ = $1; $$.push($3); }
-  | e
+  | value
     {$$ = [$1]; }
   ;
