@@ -6,7 +6,7 @@
   "scripts": {
     "test": "tape test.js",
     "jison": "jison jouch.jison",
-    "prepublish": "npm jison"
+    "prepublish": "npm run jison"
   },
   "author": "Jonathan Bowers <jonotron@gmail.com>",
   "license": "MIT",
