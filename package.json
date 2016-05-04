@@ -4,13 +4,14 @@
   "description": "couchdb query parser",
   "main": "src/jouch.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "tape test.js",
     "jison": "jison jouch.jison"
   },
   "author": "Jonathan Bowers <jonotron@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "jison": "^0.4.17"
+    "jison": "^0.4.17",
+    "tape": "^4.5.1"
   },
   "dependencies": {
     "jison": "^0.4.17"
