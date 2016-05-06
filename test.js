@@ -109,3 +109,27 @@ test('multiple %and, %not, %or replaced', t => {
 
   t.end()
 })
+
+test('ands array nicely', t => {
+  var obj = parse('a == 1 and b == 2 and c == 3')
+  var exp = { '$and': [
+    {a: {'$eq': 1}},
+    {b: {'$eq': 2}},
+    {c: {'$eq': 3}}
+  ]}
+
+  t.deepEquals(obj, exp)
+  t.end()
+})
+
+test('ors array nicely', t => {
+  var obj = parse('a == 1 or b == 2 or c == 3')
+  var exp = { '$or': [
+    {a: {'$eq': 1}},
+    {b: {'$eq': 2}},
+    {c: {'$eq': 3}}
+  ]}
+
+  t.deepEquals(obj, exp)
+  t.end()
+})
