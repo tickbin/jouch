@@ -93,3 +93,19 @@ test('not e', t => {
   t.deepEquals(obj, exp)
   t.end()
 })
+
+test('multiple %and, %not, %or replaced', t => {
+  var obj = parse('not prop1 == 1 and not prop2 == 1')
+  var str = JSON.stringify(obj)
+  t.notOk(str.match(/\%not/g), 'replaces all %not')
+
+  var obj = parse('prop1 == 1 and prop2 == 1 and prop3 == 4')
+  var str = JSON.stringify(obj)
+  t.notOk(str.match(/\%and/g), 'replaces all %and')
+
+  var obj = parse('prop1 == 1 or prop2 == 1 or prop3 == 4')
+  var str = JSON.stringify(obj)
+  t.notOk(str.match(/\%or/g), 'replaces all %or')
+
+  t.end()
+})
