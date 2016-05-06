@@ -2,7 +2,7 @@
   "name": "jouch",
   "version": "0.0.2",
   "description": "couchdb query parser",
-  "main": "jouch.js",
+  "main": "index.js",
   "scripts": {
     "test": "tape test.js",
     "jison": "jison jouch.jison",
