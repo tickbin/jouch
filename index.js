@@ -1,4 +1,5 @@
 var parser = require('./jouch').parser
+var flatten = require('lodash.flatten')
 
 function parse (input) {
   var parsed = parser.parse(input)
@@ -10,7 +11,26 @@ function parse (input) {
   parsed = parsed.replace(/\%not/g, '$not')
 
   var obj = JSON.parse(parsed)
-  return obj
+  var flat = flattenBool(obj)
+  return flat
+}
+
+function flattenBool (obj, op) {
+  var ret = {}
+  for (var key in obj) {
+    if (key === op) {
+      // we are in a nested same bool operation
+      return flatten(obj[key].map(e => flattenBool(e, op)))
+      //return [flattenBool(obj[key][0], op), flattenBool(obj[key][1], op)]
+    }
+    else if (key === '$and' || key === '$or') {
+      ret[key] = flatten(obj[key].map(e => flattenBool(e, key)))
+    } else {
+      ret[key] = obj[key]
+    }
+  }
+
+  return ret
 }
 
 module.exports = parse

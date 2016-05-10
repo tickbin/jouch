@@ -72,12 +72,12 @@
   }
 */
 var jouch = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,6],$V1=[1,8],$V2=[1,9],$V3=[5,20,21,22],$V4=[1,29],$V5=[1,30],$V6=[1,31],$V7=[5,21],$V8=[5,22],$V9=[5,20,21,22,28,29],$Va=[28,29];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,3],$V1=[1,5],$V2=[1,6],$V3=[1,8],$V4=[1,9],$V5=[5,7,8,19],$V6=[1,22],$V7=[1,23],$V8=[1,24],$V9=[5,7,8,19,25,26],$Va=[25,26];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"query":4,"EOF":5,"comboAnd":6,"comboOr":7,"e":8,"not":9,"property":10,"has":11,"value":12,"==":13,"!=":14,">=":15,"<=":16,">":17,"<":18,"(":19,")":20,"and":21,"or":22,"SYMBOL":23,"NUMBER":24,"STRING":25,"[":26,"ElemList":27,"]":28,",":29,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",9:"not",11:"has",13:"==",14:"!=",15:">=",16:"<=",17:">",18:"<",19:"(",20:")",21:"and",22:"or",23:"SYMBOL",24:"NUMBER",25:"STRING",26:"[",28:"]",29:","},
-productions_: [0,[3,2],[4,1],[4,1],[4,1],[8,2],[8,3],[8,3],[8,3],[8,3],[8,3],[8,3],[8,3],[8,3],[6,3],[6,3],[7,3],[7,3],[10,1],[12,1],[12,1],[12,3],[27,3],[27,1]],
+symbols_: {"error":2,"expressions":3,"e":4,"EOF":5,"not":6,"and":7,"or":8,"property":9,"has":10,"value":11,"==":12,"!=":13,">=":14,"<=":15,">":16,"<":17,"(":18,")":19,"SYMBOL":20,"NUMBER":21,"STRING":22,"[":23,"ElemList":24,"]":25,",":26,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",6:"not",7:"and",8:"or",10:"has",12:"==",13:"!=",14:">=",15:"<=",16:">",17:"<",18:"(",19:")",20:"SYMBOL",21:"NUMBER",22:"STRING",23:"[",25:"]",26:","},
+productions_: [0,[3,2],[4,2],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[4,3],[9,1],[11,1],[11,1],[11,3],[24,3],[24,1]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -87,66 +87,60 @@ case 1:
 return JSON.stringify($$[$0-1]);
 break;
 case 2:
-this.$ = {'%and': $$[$0]}; 
-break;
-case 3:
-this.$ = {'%or': $$[$0]}; 
-break;
-case 4: case 18:
-this.$ = $$[$0];
-break;
-case 5:
 this.$ = {'%not': $$[$0]}; 
 break;
-case 6:
+case 3:
+this.$ = {'%and': [$$[$0-2], $$[$0]]};
+break;
+case 4:
+this.$ = {'%or': [$$[$0-2], $$[$0]]};
+break;
+case 5:
 this.$ = {}; this.$[$$[$0-2]] = {'$elemMatch': {'$eq': $$[$0]}}; 
 break;
-case 7:
+case 6:
 this.$ = {}; this.$[$$[$0-2]] = {'$eq': $$[$0]};
 break;
-case 8:
+case 7:
 this.$ = {}; this.$[$$[$0-2]] = {'$neq': $$[$0]};
 break;
-case 9:
+case 8:
 this.$ = {}; this.$[$$[$0-2]] = {'$gte': $$[$0]};
 break;
-case 10:
+case 9:
 this.$ = {}; this.$[$$[$0-2]] = {'$lte': $$[$0]};
 break;
-case 11:
+case 10:
 this.$ = {}; this.$[$$[$0-2]] = {'$gt': $$[$0]};
 break;
-case 12:
+case 11:
 this.$ = {}; this.$[$$[$0-2]] = {'$lt': $$[$0]};
 break;
-case 13:
+case 12:
 this.$ = $$[$0-1];
 break;
-case 14: case 16:
-this.$ = [$$[$0-2], $$[$0]];
+case 13:
+this.$ = $$[$0];
 break;
-case 15: case 17:
-this.$ = $$[$0-2]; this.$.push($$[$0]);
-break;
-case 19:
+case 14:
 this.$ = Number(yytext);
 break;
-case 20:
-this.$ = yytext; console.log(this.$); 
+case 15:
+this.$ = yytext; 
 break;
-case 21:
+case 16:
 this.$ = $$[$0-1]; 
 break;
-case 22:
+case 17:
 this.$ = $$[$0-2]; this.$.push($$[$0]); 
 break;
-case 23:
+case 18:
 this.$ = [$$[$0]]; 
 break;
 }
 },
-table: [{3:1,4:2,6:3,7:4,8:5,9:$V0,10:7,19:$V1,23:$V2},{1:[3]},{5:[1,10]},{5:[2,2],21:[1,11]},{5:[2,3],22:[1,12]},{5:[2,4],21:[1,13],22:[1,14]},{8:15,9:$V0,10:7,19:$V1,23:$V2},{11:[1,16],13:[1,17],14:[1,18],15:[1,19],16:[1,20],17:[1,21],18:[1,22]},{8:23,9:$V0,10:7,19:$V1,23:$V2},o([11,13,14,15,16,17,18],[2,18]),{1:[2,1]},{8:24,9:$V0,10:7,19:$V1,23:$V2},{8:25,9:$V0,10:7,19:$V1,23:$V2},{8:26,9:$V0,10:7,19:$V1,23:$V2},{8:27,9:$V0,10:7,19:$V1,23:$V2},o($V3,[2,5]),{12:28,24:$V4,25:$V5,26:$V6},{12:32,24:$V4,25:$V5,26:$V6},{12:33,24:$V4,25:$V5,26:$V6},{12:34,24:$V4,25:$V5,26:$V6},{12:35,24:$V4,25:$V5,26:$V6},{12:36,24:$V4,25:$V5,26:$V6},{12:37,24:$V4,25:$V5,26:$V6},{20:[1,38]},o($V7,[2,15]),o($V8,[2,17]),o($V7,[2,14]),o($V8,[2,16]),o($V3,[2,6]),o($V9,[2,19]),o($V9,[2,20]),{12:40,24:$V4,25:$V5,26:$V6,27:39},o($V3,[2,7]),o($V3,[2,8]),o($V3,[2,9]),o($V3,[2,10]),o($V3,[2,11]),o($V3,[2,12]),o($V3,[2,13]),{28:[1,41],29:[1,42]},o($Va,[2,23]),o($V9,[2,21]),{12:43,24:$V4,25:$V5,26:$V6},o($Va,[2,22])],
-defaultActions: {10:[2,1]},
+table: [{3:1,4:2,6:$V0,9:4,18:$V1,20:$V2},{1:[3]},{5:[1,7],7:$V3,8:$V4},{4:10,6:$V0,9:4,18:$V1,20:$V2},{10:[1,11],12:[1,12],13:[1,13],14:[1,14],15:[1,15],16:[1,16],17:[1,17]},{4:18,6:$V0,9:4,18:$V1,20:$V2},o([10,12,13,14,15,16,17],[2,13]),{1:[2,1]},{4:19,6:$V0,9:4,18:$V1,20:$V2},{4:20,6:$V0,9:4,18:$V1,20:$V2},o($V5,[2,2]),{11:21,21:$V6,22:$V7,23:$V8},{11:25,21:$V6,22:$V7,23:$V8},{11:26,21:$V6,22:$V7,23:$V8},{11:27,21:$V6,22:$V7,23:$V8},{11:28,21:$V6,22:$V7,23:$V8},{11:29,21:$V6,22:$V7,23:$V8},{11:30,21:$V6,22:$V7,23:$V8},{7:$V3,8:$V4,19:[1,31]},o($V5,[2,3]),o([5,8,19],[2,4],{7:$V3}),o($V5,[2,5]),o($V9,[2,14]),o($V9,[2,15]),{11:33,21:$V6,22:$V7,23:$V8,24:32},o($V5,[2,6]),o($V5,[2,7]),o($V5,[2,8]),o($V5,[2,9]),o($V5,[2,10]),o($V5,[2,11]),o($V5,[2,12]),{25:[1,34],26:[1,35]},o($Va,[2,18]),o($V9,[2,16]),{11:36,21:$V6,22:$V7,23:$V8},o($Va,[2,17])],
+defaultActions: {7:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -627,43 +621,43 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:yy_.yytext = yy_.yytext.substr(1, yy_.yyleng-2); return 25;
+case 1:yy_.yytext = yy_.yytext.substr(1, yy_.yyleng-2); return 22;
 break;
-case 2:yy_.yytext = yy_.yytext.substr(1, yy_.yyleng-2); return 25;
+case 2:yy_.yytext = yy_.yytext.substr(1, yy_.yyleng-2); return 22;
 break;
-case 3:return 19;
+case 3:return 18;
 break;
-case 4:return 20;
+case 4:return 19;
 break;
-case 5:return 26;
+case 5:return 23;
 break;
-case 6:return 28;
+case 6:return 25;
 break;
-case 7:return 29;
+case 7:return 26;
 break;
-case 8:return 13;
+case 8:return 12;
 break;
-case 9:return 14;
+case 9:return 13;
 break;
-case 10:return 15;
+case 10:return 14;
 break;
-case 11:return 16;
+case 11:return 15;
 break;
-case 12:return 17;
+case 12:return 16;
 break;
-case 13:return 18;
+case 13:return 17;
 break;
-case 14:return 21;
+case 14:return 7;
 break;
-case 15:return 22;
+case 15:return 8;
 break;
-case 16:return 9;
+case 16:return 6;
 break;
-case 17:return 11;
+case 17:return 10;
 break;
-case 18:return 24;
+case 18:return 21;
 break;
-case 19:return 23;
+case 19:return 20;
 break;
 case 20:return 5;
 break;

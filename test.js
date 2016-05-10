@@ -110,24 +110,81 @@ test('multiple %and, %not, %or replaced', t => {
   t.end()
 })
 
-test('ands array nicely', t => {
-  var obj = parse('a == 1 and b == 2 and c == 3')
+test('variadic ANDs array nicely', t => {
+  var obj = parse('a == 1 and b == 2 and c == 3 and d == 4 and e == 5')
   var exp = { '$and': [
     {a: {'$eq': 1}},
     {b: {'$eq': 2}},
-    {c: {'$eq': 3}}
+    {c: {'$eq': 3}},
+    {d: {'$eq': 4}},
+    {e: {'$eq': 5}}
   ]}
 
   t.deepEquals(obj, exp)
   t.end()
 })
 
-test('ors array nicely', t => {
-  var obj = parse('a == 1 or b == 2 or c == 3')
+test('variadic ORs array nicely', t => {
+  var obj = parse('a == 1 or b == 2 or c == 3 or d == 4 or e == 5')
   var exp = { '$or': [
     {a: {'$eq': 1}},
     {b: {'$eq': 2}},
-    {c: {'$eq': 3}}
+    {c: {'$eq': 3}},
+    {d: {'$eq': 4}},
+    {e: {'$eq': 5}},
+  ]}
+
+  t.deepEquals(obj, exp)
+  t.end()
+})
+
+test('order of operations handled properly', t => {
+  var obj = parse('a == 1 or b == 1 and c == 1')
+  var exp = {
+    '$or': [
+      {a: {'$eq': 1}},
+      {'$and': [
+        {b: {'$eq': 1}},
+        {c: {'$eq': 1}}
+      ]}
+    ] 
+  }
+  t.deepEquals(obj, exp)
+  t.end()
+})
+
+test('handles complex nested boolean order of operations', t => {
+  var obj = parse('a == 1 and b == 2 and c == 3 or d == 4 and e == 5 and f == 6')
+  var exp = { '$or': [
+    {'$and': [
+      {a: {'$eq': 1}},
+      {b: {'$eq': 2}},
+      {c: {'$eq': 3}}
+    ]},
+    {'$and': [
+      {d: {'$eq': 4}},
+      {e: {'$eq': 5}},
+      {f: {'$eq': 6}}
+    ]}
+  ]}
+
+  t.deepEquals(obj, exp)
+  t.end()
+})
+
+test('handles parenthetical order', t => {
+  var obj = parse('(a == 1 or b == 2 or c == 3) and (d == 4 or e == 5 or f == 6)')
+  var exp = { '$and': [
+    {'$or': [
+      {a: {'$eq': 1}},
+      {b: {'$eq': 2}},
+      {c: {'$eq': 3}}
+    ]},
+    {'$or': [
+      {d: {'$eq': 4}},
+      {e: {'$eq': 5}},
+      {f: {'$eq': 6}}
+    ]}
   ]}
 
   t.deepEquals(obj, exp)

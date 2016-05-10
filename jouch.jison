@@ -42,22 +42,17 @@ has[^\w]                            return 'has';
 %% /* language grammar */
 
 expressions
-  : query EOF
+  : e EOF
     {return JSON.stringify($1);}
-  ;
-
-query
-  : comboAnd 
-    {$$ = {'%and': $1}; }
-  | comboOr 
-    {$$ = {'%or': $1}; }
-  | e
-    {$$ = $1;}
   ;
 
 e
   : 'not' e
     {$$ = {'%not': $2}; }
+  | e 'and' e
+    {$$ = {'%and': [$1, $3]};}
+  | e 'or' e
+    {$$ = {'%or': [$1, $3]};}
   | property 'has' value
     {$$ = {}; $$[$1] = {'$elemMatch': {'$eq': $3}}; }
   | property '==' value
@@ -76,19 +71,6 @@ e
     {$$ = $2;}
   ;
 
-comboAnd
-  : e 'and' e
-    {$$ = [$1, $3];}
-  | comboAnd 'and' e
-    {$$ = $1; $$.push($3);}
-  ;
-
-comboOr
-  : e 'or' e
-    {$$ = [$1, $3];}
-  | comboOr 'or' e
-    {$$ = $1; $$.push($3);}
-  ;
 
 property
   : SYMBOL
@@ -99,7 +81,7 @@ value
   : NUMBER
     {$$ = Number(yytext);}
   | STRING
-    {$$ = yytext; console.log($$); }
+    {$$ = yytext; }
   | '[' ElemList ']'
     {$$ = $2; }
   ;
