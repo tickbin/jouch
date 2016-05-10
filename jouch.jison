@@ -47,12 +47,12 @@ expressions
   ;
 
 e
-  : e 'and' e
-    {$$ = {'%and': [$1, $3]}; }
-  | e 'or' e
-    {$$ = {'%or': [$1, $3]}; }
-  | 'not' e
+  : 'not' e
     {$$ = {'%not': $2}; }
+  | e 'and' e
+    {$$ = {'%and': [$1, $3]};}
+  | e 'or' e
+    {$$ = {'%or': [$1, $3]};}
   | property 'has' value
     {$$ = {}; $$[$1] = {'$elemMatch': {'$eq': $3}}; }
   | property '==' value
@@ -71,6 +71,7 @@ e
     {$$ = $2;}
   ;
 
+
 property
   : SYMBOL
     {$$ = $1;}
@@ -80,7 +81,7 @@ value
   : NUMBER
     {$$ = Number(yytext);}
   | STRING
-    {$$ = yytext; console.log($$); }
+    {$$ = yytext; }
   | '[' ElemList ']'
     {$$ = $2; }
   ;
