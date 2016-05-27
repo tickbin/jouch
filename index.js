@@ -36,12 +36,16 @@ function flattenBool (obj, op) {
     if (key === op) {
       // we are in a nested same bool operation
       // keep flattening
-      return flatten(obj[key].map(e => flattenBool(e, op)))
+      return flatten(obj[key].map(function(e) {
+        return flattenBool(e, op)
+      }))
     }
     else if (key === '$and' || key === '$or') {
       // encountered a boolean operator, start recursing through it's children
       // and flatten on the way out
-      ret[key] = flatten(obj[key].map(e => flattenBool(e, key)))
+      ret[key] = flatten(obj[key].map(function(e) {
+        return flattenBool(e, key)
+      }))
     } else {
       // nothing special, copy out the results and terminate the recursion
       ret[key] = obj[key]
