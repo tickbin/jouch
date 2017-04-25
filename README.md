@@ -1,4 +1,4 @@
-[![Build Status](https://semaphoreci.com/api/v1/jonotron/jouch/branches/master/shields_badge.svg)](https://semaphoreci.com/jonotron/jouch)
+[![Build Status](https://semaphoreci.com/api/v1/twostoryrobot/jouch/branches/master/shields_badge.svg)](https://semaphoreci.com/twostoryrobot/jouch)
 
 A couchdb 2.0 query parser, using jison
 
