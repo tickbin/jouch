@@ -11,7 +11,7 @@
   "author": "Jonathan Bowers <jonotron@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "tape": "^4.6.2"
+    "tape": "^5.0.0"
   },
   "dependencies": {
     "jison": "^0.4.17",
