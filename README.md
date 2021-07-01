@@ -1,4 +1,8 @@
-[![Build Status](https://semaphoreci.com/api/v1/twostoryrobot/jouch/branches/master/shields_badge.svg)](https://semaphoreci.com/twostoryrobot/jouch)
+# Deprecation Notice 
+
+**Deprecation notice:** This project and codebase are not maintained. We might revisit this again in the future, but for now the code is read-only :)
+
+# Jouch
 
 A couchdb 2.0 query parser, using jison
 
